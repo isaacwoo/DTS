@@ -1,0 +1,18 @@
+Sub CreateProgressBar()
+    Dim ws As Worksheet
+    Set ws = ActiveSheet
+    Dim progress As Double
+    progress = ws.Range("A1").Value  '假设数值在A1
+    
+    '删除旧进度条（避免重复）
+    On Error Resume Next
+    ws.Shapes("ProgressBar").Delete
+    On Error GoTo 0
+    
+    '添加矩形作为进度条
+    With ws.Shapes.AddShape(msoShapeRectangle, 100, 100, progress * 200, 20)
+        .Name = "ProgressBar"
+        .Fill.ForeColor.RGB = RGB(0, 176, 80)  '绿色
+        .Line.Visible = msoFalse
+    End With
+End Sub
